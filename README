@@ -1,0 +1,5 @@
+jsonfmt
+
+This is a JSON linter and formatter. It's default mode is to pretty-print,
+but it can also be used to compact JSON files. If the file is invalid JSON,
+an error will be printed.
