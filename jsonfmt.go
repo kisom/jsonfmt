@@ -4,13 +4,17 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"os"
 
 	"github.com/kisom/goutils/lib"
 	"github.com/kisom/jsonfmt/jfmt"
 )
 
+const version = "1.0.0"
+
 func usage() {
 	progname := lib.ProgName()
+	fmt.Printf("%s version %s\n", progname, version)
 	fmt.Printf(`Usage: %s [-h] files...
 	%s is used to lint and prettify (or compact) JSON files. The
 	files will be updated in-place.
@@ -53,10 +57,16 @@ func act(action func([]byte) ([]byte, error), file string, w bool) error {
 }
 
 func main() {
-	var shouldCompact, writeFile bool
+	var shouldCompact, showUsage, writeFile bool
 	flag.BoolVar(&shouldCompact, "c", false, "Compact files instead of prettifying.")
+	flag.BoolVar(&showUsage, "h", false, "Print a usage message.")
 	flag.BoolVar(&writeFile, "w", false, "Write result to source file instead of stdout.")
 	flag.Parse()
+
+	if showUsage {
+		usage()
+		os.Exit(0)
+	}
 
 	action := jfmt.Pretty
 	if shouldCompact {
