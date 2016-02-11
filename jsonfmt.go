@@ -17,7 +17,8 @@ func usage() {
 	fmt.Printf("%s version %s\n", progname, version)
 	fmt.Printf(`Usage: %s [-h] files...
 	%s is used to lint and prettify (or compact) JSON files. The
-	files will be updated in-place.
+	files will be printed to standard output, unless the -w flag is
+	given. In this case, the files will be updated in place.
 
 	Flags:
 	-c	Compact files.
